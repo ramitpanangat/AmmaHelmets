@@ -1,26 +1,11 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from firebase_admin import credentials, firestore
-from decouple import config
 import firebase_admin
 import re
 
 # Firebase configuration 
-project_config = {
-  "type": "service_account",
-  "project_id": "ammahelmets",
-  "private_key_id": config("private_key_id"),
-  "private_key": config("private_key"),
-  "client_email": config("client_email"),
-  "client_id": config("client_id"),
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-73r9f%40ammahelmets.iam.gserviceaccount.com"
-}
-
-
-cred = credentials.Certificate(project_config)
+cred = credentials.Certificate("./main/google_services.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()

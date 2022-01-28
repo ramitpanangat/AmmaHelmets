@@ -1,2 +1,5 @@
 #Ignore .env file
 .env
+
+#Ignore google_service.json file. This file contains API keys and sensitive info of firebase.
+google_services.json
