@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block activeHome %}activeTag{% endblock activeHome %}
+    
+    
+{% block body %}
+    <h3 id="title">All helmets availabe in our store</h3>
+    <div class="grid-container">
+        {% for d in data %}
+            <div class="grid-items">
+                <img src="{{d.to_dict.image}}" width="200px">
+                <a href="{% url 'productDetails' d.id %}">{{d.to_dict.name}}</a>
+                <a id="brand" href="{% url 'brandPage' d.to_dict.brand %}">{{d.to_dict.brand}}</a>
+                <div id="price">₹ {{d.to_dict.price}}</div>
+            </div>
+    
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if data.has_previous %}
+    
+        <a href="?page=1">First Page</a>
+        <a href="?page={{data.previous_page_number}}">Previous</a>
+    
+        {% endif %}
+    
+        <span id="page-no">Page {{data.number}}/{{data.paginator.num_pages}}</span>
+    
+    
+        {% if data.has_next %}
+    
+        <a href="?page={{data.next_page_number}}">Next</a>
+        <a href="?page={{data.paginator.num_pages}}">Last Page</a>
+            
+        {% endif %}
+    </div>
+        
+
+{% endblock body %}

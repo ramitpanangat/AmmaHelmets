@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{{brand}}{% endblock title %}
+
+
+{% block body %}
+<h3 id="title">All helmets availabe from {{brand}}</h3>
+<div class="grid-container">
+    {% for product in brandProducts %}
+        <div class="grid-items">
+            <img src="{{product.to_dict.image}}" width="200px">
+            <a href="{% url 'productDetails' product.id %}">{{product.to_dict.name}}</a>
+            <div id="price">₹ {{product.to_dict.price}}</div>
+        </div>
+
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if brandProducts.has_previous %}
+
+    <a href="?page=1">First Page</a>
+    <a href="?page={{brandProducts.previous_page_number}}">Previous</a>
+
+    {% endif %}
+
+    <span id="page-no">Page {{brandProducts.number}}/{{brandProducts.paginator.num_pages}}</span>
+
+
+    {% if brandProducts.has_next %}
+
+    <a href="?page={{brandProducts.next_page_number}}">Next</a>
+    <a href="?page={{brandProducts.paginator.num_pages}}">Last Page</a>
+        
+    {% endif %}
+</div>
+    
+{% endblock body %}
+    

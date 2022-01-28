@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}No Data Found{% endblock title %}
+
+{% block body %}
+    <h3 id="title">{{errorTitle}}</h3>
+    <div class="no-data-img">
+        <img src="{% static 'no_data.svg' %}" alt="Opps! No data found.">
+    </div>
+{% endblock body %}

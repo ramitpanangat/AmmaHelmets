@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{product.name}}{% endblock title %}
+    
+{% block body %}
+
+<div class="detail-container">
+    <img src="{{product.image}}" alt="{{product.name}}">
+    <h2 id="title">{{product.name}}</h2>
+    <h6 id="price"><span>MRP:</span> ₹ {{product.price}}</h6>
+    <table class="product-table">
+        <tr>
+            <th>Brand</th>
+            <td>{{product.brand}}</td>
+        </tr>
+        <tr>
+            <th>Style</th>
+            <td>{{product.style}}</td>
+        </tr>
+        <tr>
+            <th>Color</th>
+            <td>{{product.color}}</td>
+        </tr>
+        <tr>
+            <th>Weight</th>
+            <td>{{product.weight}}</td>
+        </tr>
+    </table>
+</div>
+{% endblock body %}
+    
+    

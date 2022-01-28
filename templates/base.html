@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" text="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" text="text/css" href="{% static 'mediaQuery700.css' %}">
+    <script src="{% static 'style.js' %}" type='application/javascript'></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    
+    {% block styling %}{% endblock styling %}
+        
+    <header>
+        <nav class="navBar">
+            <a href="{% url 'home' %}" id="logo">Amma Helmets & Lottery</a>
+            <ul class="menu">
+                <li><a class="{% block activeHome %}{% endblock activeHome %}" href="{% url 'home' %}">Home</a></li>
+                <li><a id="activeOpenFace" href="{% url 'stylePage' 'Open Face' %}">Open Face</a></li>
+                <li><a id="activeFullFace" href="{% url 'stylePage' 'Full Face' %}">Full Face</a></li>
+            </ul>
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+    <div class="search-bar">
+        <form action="{% url 'search' %}" method="get">
+            <div class="search-container">
+                <input type="text" name="search" id="search">
+                <input type="submit" value="Search">
+            </div>
+        </form>
+    </div>
+    
+    {% block body %}
+        
+    {% endblock body %}
+
+    <footer>
+        <h3>Contacts</h3>
+        <ul>
+            <li><span>Visit:</span><Address>Amma Agencies, Moonupeedika, Kaipamangalam, Thrissur, Kerala - 680681</Address></li>
+        </ul>
+    </footer>
+</body>
+</html>

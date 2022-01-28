@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{{style}}{% endblock title %}
+
+{% block styling %}
+{% if style == 'Open Face' %}
+    
+    <style>
+        #activeOpenFace {
+            color: white;
+        }
+    </style>
+
+{% elif style == 'Full Face' %}
+
+    <style>
+        #activeFullFace {
+            color: white;
+        }
+    </style>
+            
+{% endif %}
+{% endblock styling %}
+    
+
+{% block body %}
+<h3 id="title">All {{style}} Helmets</h3>
+<div class="grid-container">
+        {% for product in styleProducts %}
+
+            <div class="grid-items">
+                <img src="{{product.to_dict.image}}" width="200px">
+                <a href="{% url 'productDetails' product.id %}">{{product.to_dict.name}}</a>
+                <a id="brand" href="{% url 'brandPage' product.to_dict.brand %}">{{product.to_dict.brand}}</a>
+                <div id="price">₹ {{product.to_dict.price}}</div>
+            </div>
+    
+        {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if styleProducts.has_previous %}
+
+    <a href="?page=1">First Page</a>
+    <a href="?page={{styleProducts.previous_page_number}}">Previous</a>
+
+    {% endif %}
+
+    <span id="page-no">Page {{styleProducts.number}}/{{styleProducts.paginator.num_pages}}</span>
+
+
+    {% if styleProducts.has_next %}
+
+    <a href="?page={{styleProducts.next_page_number}}">Next</a>
+    <a href="?page={{styleProducts.paginator.num_pages}}">Last Page</a>
+        
+    {% endif %}
+</div>
+    
+    
+{% endblock body %}
+    

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Search '{{searchWord}}'{% endblock title %}
+
+{% block body %}
+
+<h3 id="title">Search results for '{{searchWord}}'</h3>
+<div class="grid-container">
+    {% for data in datas %}
+        <div class="grid-items">
+            <img src="{{data.to_dict.image}}" width="200px">
+            <a href="{% url 'productDetails' data.id %}">{{data.to_dict.name}}</a>
+            <a id="brand" href="{% url 'brandPage' data.to_dict.brand %}">{{data.to_dict.brand}}</a>
+            <div id="price">₹ {{data.to_dict.price}}</div>
+        </div>
+
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if datas.has_previous %}
+
+    <a href="?search={{searchWord}}&page=1">First Page</a>
+    <a href="?search={{searchWord}}&page={{datas.previous_page_number}}">Previous</a>
+
+    {% endif %}
+
+    <span id="page-no">Page {{datas.number}}/{{datas.paginator.num_pages}}</span>
+
+
+    {% if datas.has_next %}
+
+    <a href="?search={{searchWord}}&page={{datas.next_page_number}}">Next</a>
+    <a href="?search={{searchWord}}&page={{datas.paginator.num_pages}}">Last Page</a>
+        
+    {% endif %}
+</div>
+    
+{% endblock body %}
+    
